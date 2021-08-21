@@ -1,22 +1,16 @@
-
 import random
-from datetime import date, datetime
+from datetime import datetime
 
 class light_sensor:
 
     sensor_type = 'LightSensor'
     sensor_type_code = 10
 
-    def __init__(self, location):
+    def __init__(self, location, shading_coefficent = 1):
 
         self.sensor_serial = random.randrange(10000,99999)
         self.location = location
-    
-    #def setting(self, time_frame=60, send_datetime = False):
-
-        #self.time_frame = time_frame
-        #self.current_month = current_month
-        #self.current_time = current_time
+        self.shading_coefficent = shading_coefficent
 
     def set_coefficents(self):
 
@@ -67,7 +61,7 @@ class light_sensor:
     def calculate(self):
 
         self.set_coefficents()
-        light_intensity = 100 * random.uniform(self.hour_coefficent - 0.1, self.hour_coefficent + 0.1) * self.month_coefficent
+        light_intensity = 100 * random.uniform(self.hour_coefficent - 0.1, self.hour_coefficent + 0.1) * self.month_coefficent * self.shading_coefficent
         if light_intensity >= 100:
             return 100
         else:
@@ -75,6 +69,7 @@ class light_sensor:
 
 
     def send(self):
+
         time = f'{datetime.now().year}/{datetime.now().month}/{datetime.now().day} {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}'
         return [self.sensor_type ,self.sensor_serial, self.location, time, self.calculate()]
 
