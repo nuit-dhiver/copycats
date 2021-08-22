@@ -1,10 +1,13 @@
 from confluent_kafka import Producer
-import light_sensor.sensors as light_sensor
+from Sensors.light_sensor import light_sensor
+import time
+import socket
 
-sensor = light_sensor('LocationOfSensor', shading_coefficent = 1)
-producer = Producer({'bootstrap.servers':'broker1, broker2'})
-time_frame = 60
-topic = '<SetTopicNameHere!>'
+
+sensor = light_sensor('LocationOfSensor')
+producer = Producer({'bootstrap.servers':'192.168.64.6:9092', 'client.id': socket.gethostname()})
+time_frame = 1
+topic = 'greenhouse_light'
 
 
 def delivery_report(error, msg):
@@ -18,6 +21,6 @@ def delivery_report(error, msg):
 while True:
 
     producer.poll(0)
-    producer.produce(topic, sensor.send(), callback = delivery_report)
-    sleep(time_frame)
+    producer.produce(topic, str(sensor.send()), callback = delivery_report)
+    time.sleep(time_frame)
 
