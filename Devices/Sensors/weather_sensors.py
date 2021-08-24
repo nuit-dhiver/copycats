@@ -55,16 +55,3 @@ class wind_sensor(weather_sensors):
          time = f'{datetime.now().year}/{datetime.now().month}/{datetime.now().day} {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}'
          return [self.sensor_type ,self.sensor_serial, self.location, time, self.calculate_wind()]
 
-
-wind = wind_sensor(api_key='282a9b4ec377c8f770b7c189547fdd44', location='London')
-
-print(wind.send())
-
-
-    
-
-
-
-     
-
-
