@@ -4,13 +4,12 @@ import time
 from Sensors.light_sensor import light_sensor
 
 light = light_sensor()
-record = json.loads(sensor.send())
 
 app = Flask(__name__)
-@app.route('/light', methodes=['GET'])
+@app.route('/light')
 
 def index():
-    record = json.loads(sensor.send())
-    return jsonify(record)
+    record = str(sensor.send())
+    return record
 
 app.run()
