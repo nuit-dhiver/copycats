@@ -6,7 +6,7 @@ class light_sensor:
     sensor_type = 'LightSensor'
     sensor_type_code = 10
 
-    def __init__(self, location, shading_coefficent = 1):
+    def __init__(self, location='DefaultLocation', shading_coefficent = 1):
 
         self.sensor_serial = random.randrange(10000,99999)
         self.location = location
