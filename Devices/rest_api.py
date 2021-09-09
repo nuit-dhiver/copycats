@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/light')
 
 def index():
-    record = str(sensor.send())
-    return record
+    record = sensor.send()
+    return jsonify(record)
 
 app.run()
