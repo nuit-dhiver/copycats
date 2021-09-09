@@ -1,4 +1,5 @@
 import random
+import json
 from datetime import datetime
 
 class light_sensor:
@@ -71,7 +72,19 @@ class light_sensor:
     def send(self):
 
         time = f'{datetime.now().year}/{datetime.now().month}/{datetime.now().day} {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}'
-        return [self.sensor_type ,self.sensor_serial, self.location, time, self.calculate()]
+        values = {
+            "sensor_type" : self.sensor_type,
+            "serial" : self.sensor_serial,
+            "location" : self.location,
+            "time" : time,
+            "value" : self.calculate()
+        }
+        return json.dumps(values)
+
+
+light = light_sensor()
+
+print(light.send())
 
 
         
