@@ -80,16 +80,3 @@ class light_sensor:
             "value" : self.calculate()
         }
         return json.dumps(values)
-
-
-light = light_sensor()
-
-print(light.send())
-
-
-        
-
-
-     
-
-
